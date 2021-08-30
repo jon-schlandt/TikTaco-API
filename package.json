@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jon-schlandt/TikTaco-API/issues"
   },
-  "homepage": "https://github.com/jon-schlandt/TikTaco-API#readme"
+  "homepage": "https://github.com/jon-schlandt/TikTaco-API#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
