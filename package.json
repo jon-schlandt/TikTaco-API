@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jon-schlandt/TikTaco-API#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^6.0.2"
+    "mongoose": "^6.0.2",
+    "ts-node": "^10.2.1"
   }
 }
