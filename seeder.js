@@ -8,11 +8,11 @@ const shells = require('./seed_data/shells.json')
 
 mongoose.connect('mongodb://127.0.0.1:27017/tiktaco')
   .then(() => console.log('Connected to MongoDB...'))
-  .catch((err: Error) => console.log('Could not connect to MongoDB', err))
+  .catch((err) => console.log('Could not connect to MongoDB', err))
 
 const ingredientSchema = new mongoose.Schema({
   name: String,
-  receipe_link: String
+  recipe_link: String
 })
 
 const BaseLayer = mongoose.model('Base Layer', ingredientSchema)
@@ -20,3 +20,15 @@ const Condiment = mongoose.model('Condiment', ingredientSchema)
 const Mixin = mongoose.model('Mixin', ingredientSchema)
 const Seasoning = mongoose.model('Seasoning', ingredientSchema)
 const Shell = mongoose.model('Shell', ingredientSchema)
+
+const seedIngredients = async (ingredientData, model) => {
+  ingredientData.forEach(ingredient => {
+    new model(ingredient).save()
+  })
+}
+
+seedIngredients(baseLayers.data, BaseLayer)
+seedIngredients(condiments.data, Condiment)
+seedIngredients(mixins.data, Mixin)
+seedIngredients(seasonings.data, Seasoning)
+seedIngredients(shells.data, Shell)
