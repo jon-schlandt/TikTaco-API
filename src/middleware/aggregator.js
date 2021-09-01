@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const ingredientSchema = require('../schemas/ingredient')
+const { ingredientSchema } = require('../schemas')
 
-mongoose.connect('mongodb://127.0.0.1:27017/tiktaco')
+mongoose.connect('mongodb+srv://schlanjo:9089jts%40DB@tiktaco-db.ienz1.mongodb.net/tiktaco')
   .then(() => console.log('Connected to MongoDB...'))
   .catch((err) => console.log('Could not connect to MongoDB', err))
 
