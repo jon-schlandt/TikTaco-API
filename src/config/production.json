@@ -1,0 +1,5 @@
+{
+  "db": {
+    "host": "mongodb+srv://schlanjo:${config.get(db.password)}@tiktaco-db.ienz1.mongodb.net/tiktaco"
+  }
+}
