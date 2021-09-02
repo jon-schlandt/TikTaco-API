@@ -33,7 +33,7 @@ const aggregateIngredients = async (req, res, next) => {
   const seasoning = await getRandomIngredient(Seasoning)
   const shell = await getRandomIngredient(Shell)
 
-  req.taco = { baseLayer, condiment, mixin, seasoning, shell }
+  req.taco = { base_layer, condiment, mixin, seasoning, shell }
   next()
 }
 
