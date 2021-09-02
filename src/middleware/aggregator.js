@@ -1,17 +1,13 @@
 const mongoose = require('mongoose')
-const config = require('config')
 const { ingredientSchema } = require('../schemas')
 
-const getConnectionString = () => {
-  if (process.env.NODE_ENV === 'production') {
-    const credentials = `${config.get('db.username')}:${config.get('db.password')}`
-    return config.get('db.host').replace('<credentials>', credentials)
-  }
-
-  return config.get('db.host')
+const getURI = () => {
+  return process.env.NODE_ENV === 'production'
+    ? process.env.PROD_URI
+    : process.env.DEV_URI
 }
 
-mongoose.connect(getConnectionString())
+mongoose.connect(`${getURI()}/tiktaco`)
   .then(() => console.log('Connected to MongoDB...'))
   .catch((err) => console.log('Could not connect to MongoDB', err))
 

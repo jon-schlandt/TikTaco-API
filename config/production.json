@@ -1,5 +1,0 @@
-{
-  "db": {
-    "host": "mongodb+srv://<credentials>@tiktaco-db.ienz1.mongodb.net/tiktaco"
-  }
-}
