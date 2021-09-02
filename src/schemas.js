@@ -5,4 +5,4 @@ const ingredientSchema = new mongoose.Schema({
   recipe_link: String
 })
 
-module.exports = ingredientSchema
+module.exports = { ingredientSchema }

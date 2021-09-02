@@ -1,7 +1,13 @@
 const mongoose = require('mongoose')
-const ingredientSchema = require('../schemas/ingredient')
+const { ingredientSchema } = require('../schemas')
 
-mongoose.connect('mongodb://127.0.0.1:27017/tiktaco')
+const getURI = () => {
+  return process.env.NODE_ENV === 'production'
+    ? process.env.PROD_URI
+    : process.env.DEV_URI
+}
+
+mongoose.connect(`${getURI()}/tiktaco`)
   .then(() => console.log('Connected to MongoDB...'))
   .catch((err) => console.log('Could not connect to MongoDB', err))
 
@@ -11,7 +17,12 @@ const Mixin = mongoose.model('Mixin', ingredientSchema)
 const Seasoning = mongoose.model('Seasoning', ingredientSchema)
 const Shell = mongoose.model('Shell', ingredientSchema)
 
-const getIngredients = async (req, res, next) => {
+const getRandomIngredient = async (model) => {
+  const ingredients = await model.find({})
+  return ingredients[Math.floor(Math.random() * ingredients.length)]
+}
+
+const aggregateIngredients = async (req, res, next) => {
   if (req.method !== 'GET') {
     next()
   }
@@ -26,9 +37,4 @@ const getIngredients = async (req, res, next) => {
   next()
 }
 
-const getRandomIngredient = async (model) => {
-  const ingredients = await model.find({})
-  return ingredients[Math.floor(Math.random() * ingredients.length)]
-}
-
-module.exports = getIngredients
+module.exports = aggregateIngredients
