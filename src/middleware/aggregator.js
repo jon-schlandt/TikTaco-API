@@ -1,7 +1,16 @@
 const mongoose = require('mongoose')
+const config = require('config')
 const { ingredientSchema } = require('../schemas')
 
-mongoose.connect('mongodb+srv://schlanjo:9089jts%40DB@tiktaco-db.ienz1.mongodb.net/tiktaco')
+const getConnectionString = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return config.get('db.host').replace('<password>', config.get('db.password'))
+  }
+
+  return config.get('db.host')
+}
+
+mongoose.connect(getConnectionString())
   .then(() => console.log('Connected to MongoDB...'))
   .catch((err) => console.log('Could not connect to MongoDB', err))
 
