@@ -17,6 +17,11 @@ const Mixin = mongoose.model('Mixin', ingredientSchema)
 const Seasoning = mongoose.model('Seasoning', ingredientSchema)
 const Shell = mongoose.model('Shell', ingredientSchema)
 
+const getRandomIngredient = async (model) => {
+  const ingredients = await model.find({})
+  return ingredients[Math.floor(Math.random() * ingredients.length)]
+}
+
 const aggregateIngredients = async (req, res, next) => {
   if (req.method !== 'GET') {
     next()
@@ -30,11 +35,6 @@ const aggregateIngredients = async (req, res, next) => {
 
   req.taco = { baseLayer, condiment, mixin, seasoning, shell }
   next()
-}
-
-const getRandomIngredient = async (model) => {
-  const ingredients = await model.find({})
-  return ingredients[Math.floor(Math.random() * ingredients.length)]
 }
 
 module.exports = aggregateIngredients
