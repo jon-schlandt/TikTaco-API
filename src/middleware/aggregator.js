@@ -4,7 +4,8 @@ const { ingredientSchema } = require('../schemas')
 
 const getConnectionString = () => {
   if (process.env.NODE_ENV === 'production') {
-    return config.get('db.host').replace('<password>', config.get('db.password'))
+    const credentials = `${config.get('db.username')}:${config.get('db.password')}`
+    return config.get('db.host').replace('<credentials>', credentials)
   }
 
   return config.get('db.host')
@@ -20,7 +21,7 @@ const Mixin = mongoose.model('Mixin', ingredientSchema)
 const Seasoning = mongoose.model('Seasoning', ingredientSchema)
 const Shell = mongoose.model('Shell', ingredientSchema)
 
-const getIngredients = async (req, res, next) => {
+const aggregateIngredients = async (req, res, next) => {
   if (req.method !== 'GET') {
     next()
   }
@@ -40,4 +41,4 @@ const getRandomIngredient = async (model) => {
   return ingredients[Math.floor(Math.random() * ingredients.length)]
 }
 
-module.exports = getIngredients
+module.exports = aggregateIngredients
