@@ -2,9 +2,9 @@
   "name": "be",
   "version": "1.0.0",
   "description": "A back-end suite that randomly generates taco ingredients for the TikTaco front-end.",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./build/server.js",
+    "start": "node ./build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
