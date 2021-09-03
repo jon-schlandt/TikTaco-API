@@ -1,15 +1,4 @@
-const mongoose = require('mongoose')
-const { ingredientSchema } = require('../schemas')
-
-mongoose.connect(`${process.env.DB_URI}/tiktaco`)
-  .then(() => console.log('Connected to MongoDB...'))
-  .catch((err) => console.log('Could not connect to MongoDB', err))
-
-const BaseLayer = mongoose.model('Base Layer', ingredientSchema)
-const Condiment = mongoose.model('Condiment', ingredientSchema)
-const Mixin = mongoose.model('Mixin', ingredientSchema)
-const Seasoning = mongoose.model('Seasoning', ingredientSchema)
-const Shell = mongoose.model('Shell', ingredientSchema)
+const { BaseLayer, Condiment, Mixin, Seasoning, Shell } = require('../schemas')
 
 const getRandomIngredient = async (model) => {
   const ingredients = await model.find({})
