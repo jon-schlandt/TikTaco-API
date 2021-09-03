@@ -1,13 +1,7 @@
 const mongoose = require('mongoose')
 const { ingredientSchema } = require('../schemas')
 
-const getURI = () => {
-  return process.env.NODE_ENV === 'production'
-    ? process.env.PROD_URI
-    : process.env.DEV_URI
-}
-
-mongoose.connect(`${getURI()}/tiktaco`)
+mongoose.connect(`${process.env.DB_URI}/tiktaco`)
   .then(() => console.log('Connected to MongoDB...'))
   .catch((err) => console.log('Could not connect to MongoDB', err))
 
