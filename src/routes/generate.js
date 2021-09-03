@@ -8,16 +8,20 @@ const getRandomIngredient = async (model) => {
   return ingredients[Math.floor(Math.random() * ingredients.length)]
 }
 
-const aggregateIngredients = async (req, res) => {  
-  const baseLayer = await getRandomIngredient(BaseLayer)
-  const condiment = await getRandomIngredient(Condiment)
-  const mixin = await getRandomIngredient(Mixin)
-  const seasoning = await getRandomIngredient(Seasoning)
-  const shell = await getRandomIngredient(Shell)
-
-  res.status(200).json({ base_layer: baseLayer, condiment, mixin, seasoning, shell })
+const getRandomTaco = async (req, res) => {
+  try{
+    res.status(200).json({ 
+      base_layer: await getRandomIngredient(BaseLayer), 
+      condiment: await getRandomIngredient(Condiment), 
+      mixin: await getRandomIngredient(Mixin), 
+      seasoning: await getRandomIngredient(Seasoning), 
+      shell: await getRandomIngredient(Shell) 
+    })
+  } catch (error) {
+    res.status(500).json({ error })
+  }
 }
 
-router.get('/', aggregateIngredients)
+router.get('/', getRandomTaco)
 
 module.exports = router
