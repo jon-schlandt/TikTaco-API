@@ -7,7 +7,7 @@ const generate = require('./routes/generate')
 
 const app = express()
 const port = process.env.PORT || 3001
-const allowlist = ['https://tiktaco.herokuapp.com/', 'https://tiktaco.netlify.app', 'http://localhost:3000']
+const allowlist = ['https://tiktaco.herokuapp.com', 'https://tiktaco.netlify.app', 'http://localhost:3000']
 
 mongoose.connect(`${process.env.DB_URI}/tiktaco`)
   .then(() => console.log('Connected to MongoDB...'))
